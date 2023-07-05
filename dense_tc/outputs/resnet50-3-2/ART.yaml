@@ -1,0 +1,13 @@
+ART:
+  version: 0.3
+  tables:
+  - name: system.DRAM
+    area: 0
+  - name: system.SM.TCU.RF
+    area: 8026.18
+  - name: system.SM.TCU.PE[0..127].LRF
+    area: 1309.6
+  - name: system.SM.TCU.PE[0..127].MAC
+    area: 1239.5
+  - name: system.SM.GLB
+    area: 2079246.0

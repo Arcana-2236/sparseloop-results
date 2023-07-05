@@ -1,0 +1,75 @@
+architecture:
+  version: 0.3
+  subtree:
+    - name: system
+      attributes: 
+        technology: 45nm
+      
+      local:
+        - name: DRAM
+          class: DRAM
+          attributes:
+            type: HBM2
+            width: 64
+            metadata_storage_width: 64
+            datawidth: 16
+            cluster-size: 1
+            read_bandwidth: 32
+            write_bandwidth: 32
+      
+      subtree:
+        - name: SM
+          # attributes:
+          #   meshY: 128
+          #   meshX: 128
+          local:
+            - name: GLB  
+              class: storage
+              subclass: SRAM_MD
+              attributes:
+                data_storage_depth: 33024
+                data_storage_width: 256
+                metadata_storage_depth: 16384
+                metadata_storage_width: 64
+                n_banks: 2
+                datawidth: 16
+                cluster-size: 1
+                read_bandwidth: 32
+                write_bandwidth: 32
+
+          subtree:
+            - name: TCU
+              local: 
+                - name: Buffer
+                  class: storage 
+                  subclass: SRAM_MD
+                  attributes:
+                    # to accommodate for a dense Z with M=16 and N=8
+                    data_storage_depth: 128
+                    data_storage_width: 16
+                    n_banks: 16
+                    n_rdwr_ports: 2
+                    datawidth: 16
+                    cluster-size: 1
+              subtree: 
+                - name: PE[0..127]
+                  local:
+                  - name: LineBuffer
+                    class: storage
+                    subclass: SRAM-MD
+                    attributes:
+                      data_storage_depth: 1
+                      data_storage_width: 16
+                      metadata_storage_depth: 1  
+                      metadata_storage_width: 8
+                      datawidth: 16
+                      cluster-size: 1
+                      meshY: 16
+                      meshX: 8
+                  - name: MAC
+                    class: compute
+                    subclass: Imac
+                    attributes:
+                      datawidth: 16
+                      meshY: 16
+                      meshX: 8

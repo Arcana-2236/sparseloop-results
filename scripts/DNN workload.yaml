@@ -1,0 +1,48 @@
+- label: bert-mha1
+  op: gemm
+  shape: [2304, 512, 768]
+  densities: [100,100, 90,10,90,10]
+- label: bert-mha2
+  op: gemm
+  shape: [768, 512, 768]
+  densities: [100,100, 100,10,100,10]
+- label: bert-ffn1
+  op: gemm
+  shape: [3072, 512, 768]
+  densities: [100,100, 100,10,100,10]
+- label: bert-ffn2
+  op: gemm
+  shape: [768, 512, 3072]
+  densities: [100,100, 100,10,100,10]
+- label: resnet50-2-3
+  op: gemm
+  shape: [256,200704,64]
+  densities: [40,60,40,80,50,70]
+- label: resnet50-3-3
+  op: gemm
+  shape: [512,50176,128]
+  densities: [40,50,40,70,40,60]
+- label: resnet50-4-3
+  op: gemm
+  shape: [1024,12544,256]
+  densities: [40,60,50,70,50,70]
+- label: resnet50-5-3
+  op: gemm
+  shape: [2048,3072,512]
+  densities: [20,40,20,100,30,90]
+- label: resnet50-2-2
+  op: conv
+  shape: [64,56,56,64,64,3,3]
+  densities: [50,60,50,70,50,80]
+- label: resnet50-3-2
+  op: conv
+  shape: [64,28,28,128,128,3,3]
+  densities: [30,30,30,80,20,90]
+- label: resnet50-4-2
+  op: conv
+  shape: [64,14,14,256,256,3,3]
+  densities: [30,30,30,80,30,90]
+- label: resnet50-5-2
+  op: conv
+  shape: [64,7,7,512,512,3,3]
+  densities: [20,20,20,80,20,90]

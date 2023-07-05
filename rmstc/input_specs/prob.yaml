@@ -1,0 +1,35 @@
+model:
+  verbose: True
+
+problem:
+  shape:
+    name: MatrixMultiply
+    dimensions: [ M, N, K ]
+    data-spaces:
+      - name: A
+        projection:
+          - [ [ M ] ]
+          - [ [ K ] ]
+
+      - name: B
+        projection:
+          - [ [ N ] ]
+          - [ [ K ] ]
+
+      - name: Z
+        projection:
+          - [ [ M ] ]
+          - [ [ N ] ]
+        read-write: True
+
+  instance:
+    M: 2048
+    K: 2048
+    N: 2048
+    densities:
+      A:
+        density: 0.5
+        distribution: fixed-structured
+      B:
+        distribution: hypergeometric
+        density: 0.5

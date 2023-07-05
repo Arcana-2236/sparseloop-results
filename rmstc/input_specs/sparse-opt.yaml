@@ -1,0 +1,107 @@
+model:
+  verbose: True
+sparse_optimizations:
+  targets:
+    - name: DRAM
+      representation-format:
+        data-spaces:
+          - name: A
+            rank-application-order: inner-to-outer
+            ranks:
+            - format: UOP               # DRAM M temporal
+              payload-word-bits: 0
+            - format: UOP               # GLB K temporal
+              payload-word-bits: 0
+            - format: UOP               # GLB M temporal
+              payload-word-bits: 0
+            - format: UOP               # GLB M spatial
+              payload-word-bits: 0
+            - format: UOP               # Buffer K temporal
+              payload-word-bits: 0
+            - format: UOP               # Buffer K spatial
+              payload-word-bits: 0
+            # - format: UOP
+            #   payload-word-bits: 0
+            - format: CP
+              metadata-word-bits: 2
+          - name: B          
+            rank-application-order: inner-to-outer
+            ranks:
+              - format: UOP             # DRAM N temporal
+              - format: UOP             # GLB K temporal
+              - format: UOP             # GLB N temporal
+              - format: UOP             # Buffer K temporal
+              - format: UOP             # Buffer K spatial
+              # - format: UOP
+              - format: B               # LRF N temporal
+              - format: B               # LRF N spatial
+                metadata-word-bits: 1
+                flattened_rankIDs: [ [N] ]
+   
+    - name: GLB
+      representation-format:
+        data-spaces:
+          - name: A
+            rank-application-order: inner-to-outer
+            ranks:
+            - format: UOP               # GLB M temporal
+              payload-word-bits: 0
+            - format: UOP               # GLB K temporal
+              payload-word-bits: 0
+            - format: UOP               # GLB M spatial
+              payload-word-bits: 0
+            - format: UOP               # Buffer K temporal
+              payload-word-bits: 0      
+            - format: UOP               # Buffer K spatial
+              payload-word-bits: 0
+            - format: CP
+              metadata-word-bits: 2
+          - name: B          
+            rank-application-order: inner-to-outer
+            ranks:
+              - format: UOP             # GLB N temporal
+              - format: UOP             # GLB K temporal
+              - format: UOP             # Buffer K temporal
+              - format: UOP             # Buffer K spatial
+              # - format: UOP
+              - format: B               # LRF N temporal
+              - format: B               # LRF N spatial
+                metadata-word-bits: 1
+                flattened_rankIDs: [ [N] ]
+    
+    - action-optimization:
+      - condition-on:
+        - A
+        target: B
+        type: skipping-spatial
+      - condition-on:
+        - A
+        target: Z
+        type: skipping-spatial
+      - condition-on: [ B ]
+        target: Z
+        type: skipping
+      name: Buffer
+
+    - name: LineBuffer
+      representation-format:
+        data-spaces:
+          - name: A
+            ranks:
+              - format: CP
+                metadata-word-bits: 2
+        #   - name: B          
+        #     rank-application-order: inner-to-outer
+        #     ranks:
+          #     - format: UOP
+          #     - format: UOP
+          #     - format: B             # LRF N temporal
+          #       metadata-word-bits: 1
+          #    - format: B             # LRF N spatial
+          #       metadata-word-bits: 1
+          #       flattened_rankIDs: [ [N] ]
+ 
+      action-optimization:
+        - type: position-skipping
+          target: B
+          condition-on: []

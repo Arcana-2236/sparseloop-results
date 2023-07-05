@@ -1,0 +1,78 @@
+architecture:
+  version: 0.3
+  subtree:
+    - name: system
+      attributes: 
+        technology: 45nm
+      
+      local:
+        - name: DRAM
+          class: DRAM
+          attributes:
+            type: HBM2
+            width: 64
+            metadata_storage_width: 64
+            datawidth: 16
+            cluster-size: 1
+            read_bandwidth: 32
+            write_bandwidth: 32
+      
+      subtree:
+        - name: SM
+          local:
+            - name: GLB  
+              class: storage
+              subclass: SRAM_MD
+              attributes:
+                data_storage_depth: 33024 # 65536
+                data_storage_width: 256
+                metadata_storage_depth: 16384
+                metadata_storage_width: 64
+                n_banks: 2
+                datawidth: 16
+                cluster-size: 1
+                read_bandwidth: 32
+                write_bandwidth: 32
+         
+          subtree:
+            - name: RM[0..15]
+              local:
+                - name: Buffer
+                  class: storage
+                  subclass: SRAM_MD
+                  attributes:
+                    # to accommodate for a dense Z with M=16 N=16
+                    # and two operand A, B's occupancy
+                    data_storage_depth: 16
+                    data_storage_width: 16
+                    metadata_storage_width: 16
+                    metadata_storage_depth: 4
+                    datawidth: 16
+                    cluster-size: 1
+                    meshY: 16
+                    meshX: 1
+                    write_bandwidth: 116    # change?
+                    read_bandwidth: 116
+              subtree:
+                - name: Lane
+                  local: 
+                  - name: LineBuffer
+                    class: storage
+                    subclass: SRAM_MD
+                    attributes:
+                      data_storage_depth: 17
+                      data_storage_width: 16
+                      metadata_storage_depth: 17
+                      metadata_storage_width: 8
+                      datawidth: 16
+                      cluster-size: 1
+                      meshY: 16
+                      meshX: 1
+                  - name: MAC
+                    class: compute
+                    subclass: Imac
+                    attributes:
+                      datawidth: 16
+                      meshY: 16
+                      meshX: 1
+

@@ -1,0 +1,48 @@
+sparse_optimizations:
+  targets:
+    - name: DRAM
+      representation-format:
+        data-spaces:
+          - name: A          
+            rank-application-order: inner-to-outer
+            ranks:
+              - format: UOP
+              - format: UOP
+              - format: UOP
+              - format: UOP
+              - format: UOP
+              - format: UOP
+              - format: CP                # RF K spatial
+                metadata-word-bits: 2    
+          
+    - name: GLB
+      representation-format:
+        data-spaces:
+          - name: A          
+            rank-application-order: inner-to-outer
+            ranks:
+              - format: UOP
+              - format: UOP
+              - format: UOP
+              - format: UOP
+              - format: UOP
+              - format: CP
+                metadata-word-bits: 2
+      
+    
+    - name: Buffer            
+      action-optimization:    
+        - type: skipping-spatial      
+          target: B           
+          condition-on: [ A ] 
+        - type: skipping-spatial
+          target: Z
+          condition-on: [ A ]
+
+    - name: LineBuffer        
+      representation-format:          
+        data-spaces:
+          - name: A          
+            ranks:            
+              - format: CP   
+                metadata-word-bits: 2

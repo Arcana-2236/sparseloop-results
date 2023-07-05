@@ -1,0 +1,13 @@
+ART:
+  version: 0.3
+  tables:
+  - name: system.DRAM
+    area: 0
+  - name: system.SM.RM[0..15].Buffer
+    area: 8026.18
+  - name: system.SM.RM[0..15].Lane[0..1].LineBuffer
+    area: 1309.6
+  - name: system.SM.RM[0..15].Lane[0..1].MAC    # datawidth = 16
+    area: 1239.5
+  - name: system.SM.GLB
+    area: 2079246.0
