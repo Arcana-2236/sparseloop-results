@@ -34,29 +34,29 @@ architecture:
       - local:
         - attributes:
             cluster-size: 1
-            data_storage_depth: 16
+            data_storage_depth: 8
             data_storage_width: 16
             datawidth: 16
             meshX: 1
-            meshY: 16
-            metadata_storage_depth: 4
+            meshY: 128
+            metadata_storage_depth: 2
             metadata_storage_width: 16
             read_bandwidth: 116
             write_bandwidth: 116
           class: storage
           name: Buffer
           subclass: SRAM_MD
-        name: RM[0..15]
+        name: RM[0..127]
         subtree:
         - local:
           - attributes:
               cluster-size: 1
-              data_storage_depth: 17
+              data_storage_depth: 9
               data_storage_width: 16
               datawidth: 16
               meshX: 1
-              meshY: 16
-              metadata_storage_depth: 17
+              meshY: 128
+              metadata_storage_depth: 9
               metadata_storage_width: 8
             class: storage
             name: LineBuffer
@@ -64,7 +64,7 @@ architecture:
           - attributes:
               datawidth: 16
               meshX: 1
-              meshY: 16
+              meshY: 128
             class: compute
             name: MAC
             subclass: Imac
@@ -351,20 +351,20 @@ compound_components:
       name: adder
   version: 0.3
 mapping:
-- factors: K=1 N=32 M=32
+- factors: K=1 N=32 M=16
   permutation: KNM
   target: DRAM
   type: temporal
-- factors: K=128 N=4 M=4
+- factors: K=256 N=8 M=1
   permutation: NMK
   target: GLB
   type: temporal
-- factors: M=16 N=1 K=1
+- factors: M=128 N=1 K=1
   permutation: KNM
   split: 1
   target: GLB
   type: spatial
-- factors: K=16 N=1 M=1
+- factors: K=8 N=1 M=1
   permutation: NMK
   target: Buffer
   type: temporal
@@ -382,7 +382,7 @@ mapping:
   - B
   target: LineBuffer
   type: bypass
-- factors: K=1 N=16 M=1
+- factors: K=1 N=8 M=1
   permutation: NMK
   target: LineBuffer
   type: temporal

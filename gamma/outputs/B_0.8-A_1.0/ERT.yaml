@@ -12,7 +12,7 @@ ERT:
     - name: idle
       arguments: null
       energy: 0
-  - name: system.SM.RM[0..15].Buffer
+  - name: system.SM.RM[0..127].Buffer
     actions:
     - name: write
       arguments: null
@@ -38,7 +38,7 @@ ERT:
     - name: gated_metadata_write
       arguments: null
       energy: 0.00737
-  - name: system.SM.RM[0..15].Lane.LineBuffer
+  - name: system.SM.RM[0..127].Lane.LineBuffer
     actions:
     - name: write
       arguments: null
@@ -64,7 +64,7 @@ ERT:
     - name: gated_metadata_write
       arguments: null
       energy: 0.00209
-  - name: system.SM.RM[0..15].Lane.MAC
+  - name: system.SM.RM[0..127].Lane.MAC
     actions:
     - name: mac_random
       arguments: null

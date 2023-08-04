@@ -58,7 +58,7 @@ def calc_psumb_access_rmstc(A_density, B_density):
 
 def calc_psumb_access_gamma(A_density, B_density):
     # print("calc psumb gamma ", B_density)
-    tile=16     # k
+    tile=8     # k
     probs = {}
     
     # both A and B are non-zero

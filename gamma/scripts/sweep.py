@@ -75,13 +75,13 @@ def main():
             new_problem["problem"]["instance"]["densities"]["A"]["density"] = A_density
 
             new_mapping = deepcopy(mapping)
-            for item in new_mapping["mapping"]:
-                if item["target"] == "Buffer" and item["type"] == "temporal":
-                    if A_density != 0.5:
-                        item["factors"] = "K=16 N=1 M=1"
-                if item["target"] == "GLB" and item["type"] == "temporal":
-                    if A_density != 0.5:
-                        item["factors"] = "K=128 N=4 M=4"
+            # for item in new_mapping["mapping"]:
+            #     if item["target"] == "Buffer" and item["type"] == "temporal":
+            #         if A_density != 0.5:
+            #             item["factors"] = "K=16 N=1 M=1"
+            #     if item["target"] == "GLB" and item["type"] == "temporal":
+            #         if A_density != 0.5:
+            #             item["factors"] = "K=128 N=4 M=4"
         
             aggregated_input = {}
             aggregated_input.update(arch)

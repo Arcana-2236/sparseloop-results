@@ -6,7 +6,7 @@ mapping:
 - target: DRAM
   type: temporal
   permutation: KNM
-  factors: K=1 N=32 M=32    
+  factors: K=1 N=32 M=16    
 
 #
 # GLB
@@ -14,12 +14,12 @@ mapping:
 
 - target: GLB
   type: temporal
-  factors: K=64 N=4 M=4
+  factors: K=256 N=8 M=1
   permutation: NMK
 
 - target: GLB
   type: spatial
-  factors: M=16 N=1 K=1
+  factors: M=128 N=1 K=1
   permutation: KNM
   split: 1
 
@@ -29,7 +29,7 @@ mapping:
 
 - target: Buffer
   type: temporal
-  factors: K=32 N=1 M=1 
+  factors: K=8 N=1 M=1 
   permutation: NMK
 
 - target: Buffer
@@ -49,5 +49,5 @@ mapping:
 
 - target: LineBuffer
   type: temporal
-  factors: K=1 N=16 M=1 
+  factors: K=1 N=8 M=1 
   permutation: NMK

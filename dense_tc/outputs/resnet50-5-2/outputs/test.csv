@@ -1,0 +1,13 @@
+Label,Dense Inference DTC,Dense Inference NV-STC,Dense Inference DS-STC,Dense Inference RM-STC,Sparse Inference DTC,Sparse Inference NV-STC,Sparse Inference DS-STC,Sparse Inference RM-STC,Dense Training DTC,Dense Training NV-STC,Dense Training DS-STC,Dense Training RM-STC,Sparse Training DTC,Sparse Training NV-STC,Sparse Training DS-STC,Sparse Training RM-STC
+bert-mha1,7173397495.317806,,,,,,,,,,,,,,,
+bert-mha2,2391132498.439268,,,,,,,,,,,,,,,
+bert-ffn1,9564529993.757072,,,,,,,,,,,,,,,
+bert-ffn2,9490137230.094229,,,,,,,,,,,,,,,
+resnet50-2-3,28534270369.612198,,,,,,,,,,,,,,,
+resnet50-3-3,26917788192.21074,,,,,,,,,,,,,,,
+resnet50-4-3,26122241246.23964,,,,,,,,,,,,,,,
+resnet50-5-3,25775244344.172623,,,,,,,,,,,,,,,
+resnet50-2-2,57721672030.33061,,,,,,,,,,,,,,,
+resnet50-3-2,57324805281.825745,,,,,,,,,,,,,,,
+resnet50-4-2,57154933728.71498,,,,,,,,,,,,,,,
+resnet50-5-2,66645103636.04599,,,,,,,,,,,,,,,

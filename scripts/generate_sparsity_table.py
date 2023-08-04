@@ -72,7 +72,7 @@ for index, row in sparse_gemm_data.iterrows():
     output = parse_timeloop_stats(parse_filename)
     actual_mac = output['actual_mac']
     ratio = calc_psumb_access_gamma(float(A_density), float(B_density))
-    output['energy_pJ'] = output['energy_pJ'] - np.nansum(output['energy_breakdown_pJ']['Buffer']['storage_access_energy']) + np.nansum(output['energy_breakdown_pJ']['Buffer']['storage_access_energy']) * ratio / 16 - \
+    output['energy_pJ'] = output['energy_pJ'] - np.nansum(output['energy_breakdown_pJ']['Buffer']['storage_access_energy']) + np.nansum(output['energy_breakdown_pJ']['Buffer']['storage_access_energy']) * ratio / 8 - \
         output['energy_breakdown_pJ']['LineBuffer']['network_energy'][2] + output['energy_breakdown_pJ']['LineBuffer']['network_energy'][2] / math.sqrt(2)
     # here /k means modify 基数
     sparse_gemm_data.loc[index, 'Gamma (A Dense)'] = (output['energy_pJ'] - np.nansum(output['energy_breakdown_pJ']['Buffer']['network_energy']))
@@ -103,7 +103,7 @@ for index, row in sparse_gemm_data.iterrows():
     output = parse_timeloop_stats(parse_filename)
     actual_mac = output['actual_mac']
     ratio = calc_psumb_access_gamma(float(A_density), float(B_density))
-    output['energy_pJ'] = output['energy_pJ'] - np.nansum(output['energy_breakdown_pJ']['Buffer']['storage_access_energy']) + np.nansum(output['energy_breakdown_pJ']['Buffer']['storage_access_energy']) * ratio / 32 - \
+    output['energy_pJ'] = output['energy_pJ'] - np.nansum(output['energy_breakdown_pJ']['Buffer']['storage_access_energy']) + np.nansum(output['energy_breakdown_pJ']['Buffer']['storage_access_energy']) * ratio / 8 - \
         output['energy_breakdown_pJ']['LineBuffer']['network_energy'][2] + output['energy_breakdown_pJ']['LineBuffer']['network_energy'][2] / math.sqrt(2)
     # here /k means modify 基数
     sparse_gemm_data.loc[index, 'Gamma (A 50%)'] = (output['energy_pJ'] - np.nansum(output['energy_breakdown_pJ']['Buffer']['network_energy']))
@@ -131,7 +131,7 @@ for index, row in sparse_gemm_data.iterrows():
     output = rmstc_random_postprocess(output, 0.2)
     actual_mac = output['actual_mac']
     ratio = calc_psumb_access_gamma(float(A_density), float(B_density))
-    output['energy_pJ'] = output['energy_pJ'] - np.nansum(output['energy_breakdown_pJ']['Buffer']['storage_access_energy']) + np.nansum(output['energy_breakdown_pJ']['Buffer']['storage_access_energy']) * ratio / 16 - \
+    output['energy_pJ'] = output['energy_pJ'] - np.nansum(output['energy_breakdown_pJ']['Buffer']['storage_access_energy']) + np.nansum(output['energy_breakdown_pJ']['Buffer']['storage_access_energy']) * ratio / 8 - \
         output['energy_breakdown_pJ']['LineBuffer']['network_energy'][2] + output['energy_breakdown_pJ']['LineBuffer']['network_energy'][2] / math.sqrt(2)
     # here /16 means modify 基数
     sparse_gemm_data.loc[index, 'Gamma (A 20%)'] = (output['energy_pJ'] - np.nansum(output['energy_breakdown_pJ']['Buffer']['network_energy']))
